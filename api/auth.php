@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Handle Logout
 if (isset($_GET['logout'])) {
     session_destroy();
-    header("Location: learning-dashboard.php");
+    header("Location: /learning-dashboard.php");
     exit();
 }
 
