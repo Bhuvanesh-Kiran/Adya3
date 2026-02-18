@@ -8,50 +8,86 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
+function uploadToImgBB($file_tmp) {
+    if (!$file_tmp || !is_uploaded_file($file_tmp)) return null;
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://api.imgbb.com/1/upload?key=' . IMGBB_API_KEY);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, [
+        'image' => base64_encode(file_get_contents($file_tmp))
+    ]);
+
+    $response = curl_exec($ch);
+    $result = json_decode($response, true);
+    curl_close($ch);
+
+    return (isset($result['data']['url'])) ? $result['data']['url'] : null;
+}
+
+// --- HANDLE ADD COURSE ---
 if (isset($_POST['add_course'])) {
-    // 1. Sanitize text inputs
     $title    = sanitize($_POST['title']);
-    $price    = sanitize($_POST['price']); // This will be stored in new_price
+    $price    = sanitize($_POST['price']);
     $category = sanitize($_POST['category']);
     $duration = sanitize($_POST['duration']);
-    // 2. Handle Image Upload
-    $image_name = $_FILES['course_image']['name'];
-    $image_tmp  = $_FILES['course_image']['tmp_name'];
-    $upload_dir = "assets/images/courses/";
     
-    // Create directory if it doesn't exist
-    if (!is_dir($upload_dir)) {
-        mkdir($upload_dir, 0777, true);
-    }
+    // Default placeholder
+    $db_image_path = "assets/images/placeholder.jpg"; 
 
-    // Generate unique filename to avoid conflicts
-    $file_ext   = pathinfo($image_name, PATHINFO_EXTENSION);
-    $clean_name = preg_replace("/[^a-zA-Z0-9]/", "_", $title);
-    $new_filename = time() . "_" . $clean_name . "." . $file_ext;
-    
-    // This is the full path string we will store in the 'image_path' column
-    $db_image_path = $upload_dir . $new_filename;
-
-    if (move_uploaded_file($image_tmp, $db_image_path)) {
-        // 3. Insert into Database using your exact column names
-        // Columns: title, category, new_price, image_path
-        $stmt = $conn->prepare("INSERT INTO courses (title, category, new_price, image_path,duration) VALUES (?,?, ?, ?, ?)");
-        
-        // "ssds" = string (title), string (category), double (price), string (path)
-        $stmt->bind_param("ssdss", $title, $category, $price, $db_image_path,$duration);
-
-        if ($stmt->execute()) {
-            // Redirect back to courses view with success message
-            header("Location: admin-dashboard.php?view=manage_courses&status=success");
-        } else {
-            // Database Error handling
-            header("Location: admin-dashboard.php?view=manage_courses&status=error&msg=db_fail");
+    // Upload to ImgBB instead of local folder
+    if (!empty($_FILES['course_image']['tmp_name'])) {
+        $uploaded_url = uploadToImgBB($_FILES['course_image']['tmp_name']);
+        if ($uploaded_url) {
+            $db_image_path = $uploaded_url;
         }
-        $stmt->close();
-    } else {
-        // Upload Error handling
-        header("Location: admin-dashboard.php?view=manage_courses&status=error&msg=upload_fail");
     }
+
+    $stmt = $conn->prepare("INSERT INTO courses (title, category, new_price, image_path, duration) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssdss", $title, $category, $price, $db_image_path, $duration);
+
+    if ($stmt->execute()) {
+        header("Location: admin-dashboard.php?view=manage_courses&status=success");
+    } else {
+        header("Location: admin-dashboard.php?view=manage_courses&status=error&msg=db_fail");
+    }
+    $stmt->close();
+    exit();
+}
+
+// --- HANDLE UPDATE COURSE ---
+if (isset($_POST['update_course'])) {
+    $id       = sanitize($_POST['course_id']);
+    $title    = sanitize($_POST['title']);
+    $price    = sanitize($_POST['price']);
+    $category = sanitize($_POST['category']);
+    $duration = sanitize($_POST['duration']);
+
+    // Check if a new image was uploaded
+    if (!empty($_FILES['course_image']['tmp_name'])) {
+        $uploaded_url = uploadToImgBB($_FILES['course_image']['tmp_name']);
+        if ($uploaded_url) {
+            // Update with NEW image URL
+            $stmt = $conn->prepare("UPDATE courses SET title=?, new_price=?, category=?, image_path=?, duration=? WHERE id=?");
+            $stmt->bind_param("sdsssi", $title, $price, $category, $uploaded_url, $duration, $id);
+        } else {
+            header("Location: admin-dashboard.php?view=manage_courses&status=error&msg=upload_fail");
+            exit();
+        }
+    } else {
+        // Update WITHOUT changing the existing image
+        $stmt = $conn->prepare("UPDATE courses SET title=?, new_price=?, category=?, duration=? WHERE id=?");
+        $stmt->bind_param("sdssi", $title, $price, $category, $duration, $id);
+    }
+
+    if ($stmt->execute()) {
+        header("Location: admin-dashboard.php?view=manage_courses&status=updated");
+    } else {
+        header("Location: admin-dashboard.php?view=manage_courses&status=error");
+    }
+    $stmt->close();
+    exit();
 }
 // Handle Delete
 if (isset($_GET['delete_course'])) {
@@ -64,48 +100,7 @@ if (isset($_GET['delete_course'])) {
     exit();
 }
 
-// Handle Update
-if (isset($_POST['update_course'])) {
-    $id = sanitize($_POST['course_id']);
-    $title = sanitize($_POST['title']);
-    $price = sanitize($_POST['price']);
-    $category = sanitize($_POST['category']);
-    $duration = sanitize($_POST['duration']);
-    // Check if a new image was uploaded
-    if (!empty($_FILES['course_image']['name'])) {
-        $image_name = $_FILES['course_image']['name'];
-        $image_tmp = $_FILES['course_image']['tmp_name'];
-        $upload_dir = "assets/images/courses/";
-        
-        $file_ext = pathinfo($image_name, PATHINFO_EXTENSION);
-        $clean_name = preg_replace("/[^a-zA-Z0-9]/", "_", $title);
-        $new_filename = time() . "_" . $clean_name . "." . $file_ext;
-        $db_image_path = $upload_dir . $new_filename;
 
-        if (move_uploaded_file($image_tmp, $db_image_path)) {
-            // Update including the new image path
-            $stmt = $conn->prepare("UPDATE courses SET title=?, new_price=?, category=?, image_path=? ,duration=? WHERE id=?");
-            $stmt->bind_param("sdsssi", $title, $price, $category, $db_image_path, $duration , $id);
-        } else {
-            header("Location: admin-dashboard.php?view=manage_courses&status=error&msg=upload_fail");
-            exit();
-        }
-    } else {
-        // Update WITHOUT changing the image
-        $stmt = $conn->prepare("UPDATE courses SET title=?, new_price=?, category=? ,duration=? WHERE id=?");
-        $stmt->bind_param("sdssi", $title, $price, $category,$duration, $id);
-    }
-
-    // Now $stmt is guaranteed to exist regardless of which path was taken
-    if ($stmt->execute()) {
-        header("Location: admin-dashboard.php?view=manage_courses&status=updated");
-    } else {
-        header("Location: admin-dashboard.php?view=manage_courses&status=error&msg=db_fail");
-    }
-    
-    $stmt->close();
-    exit();
-}
 // Handle Add Lesson
 if (isset($_POST['add_lesson'])) {
     $course_id    = (int)$_POST['course_id'];

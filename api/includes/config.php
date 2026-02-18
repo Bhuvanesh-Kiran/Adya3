@@ -8,7 +8,8 @@ define('DB_USER', getenv('MYSQL_ADDON_USER') ?: 'urwekbajkg1uduch');
 define('DB_PASS', getenv('MYSQL_ADDON_PASSWORD') ?: '5YGFhxJdzEyQXX8L8NQd');
 define('DB_NAME', getenv('MYSQL_ADDON_DB') ?: 'bdfmslrjyj2ghxmufzkl');
 define('DB_PORT', getenv('MYSQL_ADDON_PORT') ?: 3306);
-
+// Add this near your other defines
+define('IMGBB_API_KEY', 'e7dc348c496b36a71e1c4a87e499472f');
 // 3. Create Database Connection (CRITICAL: Must happen before session_start)
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
