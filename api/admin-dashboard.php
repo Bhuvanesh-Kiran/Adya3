@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Security Guard: Kick out anyone who isn't an admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: learning-dashboard.php?error=access_denied");
+    header("Location: /learning-dashboard.php?error=access_denied");
     exit();
 }
 

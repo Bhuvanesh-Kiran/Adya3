@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 } 
 
 if (!isset($_SESSION['user_id']) || empty($_SESSION['cart'])) {
-    header("Location: cart.php");
+    header("Location: /cart.php");
     exit();
 }
 

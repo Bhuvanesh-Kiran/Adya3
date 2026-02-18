@@ -19,7 +19,7 @@ if (isset($_GET['remove'])) {
     if (isset($_SESSION['cart'][$id_to_remove])) {
         unset($_SESSION['cart'][$id_to_remove]);
     }
-    header("Location: cart.php");
+    header("Location: /cart.php");
     exit();
 }
 
@@ -27,7 +27,7 @@ $page_title = 'Your Cart';
 require_once 'includes/header.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: learning-dashboard.php");
+    header("Location: /learning-dashboard.php");
     exit();
 }
 
