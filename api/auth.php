@@ -23,13 +23,13 @@ if (isset($_POST['register'])) {
     // 1. Password Strength Check
     $pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/";
     if (!preg_match($pattern, $password)) {
-        header("Location: learning-dashboard.php?error=weak_password");
+        header("Location: /learning-dashboard.php?error=weak_password");
         exit();
     }
 
     // 2. Check if passwords match
     if ($password !== $confirm) {
-        header("Location: learning-dashboard.php?error=password_mismatch");
+        header("Location: /learning-dashboard.php?error=password_mismatch");
         exit();
     }
 
@@ -49,9 +49,9 @@ if (isset($_POST['register'])) {
         
         // Dynamic Redirect
         if ($_SESSION['role'] === 'admin') {
-            header("Location: admin-dashboard.php");
+            header("Location: /admin-dashboard.php");
         } else {
-            header("Location: learning-dashboard.php");
+            header("Location: /learning-dashboard.php");
         }
         exit();
     }
@@ -71,10 +71,10 @@ if (isset($_POST['register'])) {
         $_SESSION['full_name'] = $first_name . ' ' . $last_name;
         $_SESSION['role'] = 'student'; // New registrations are students by default
 
-        header("Location: learning-dashboard.php?signup=success");
+        header("Location: /learning-dashboard.php?signup=success");
         exit();
     } else {
-        header("Location: learning-dashboard.php?error=db_error");
+        header("Location: /learning-dashboard.php?error=db_error");
         exit();
     }
 }
@@ -113,17 +113,17 @@ if (isset($_POST['login'])) {
 
             // Role-Based Redirection
             if ($_SESSION['role'] === 'admin') {
-                header("Location: admin-dashboard.php");
+                header("Location: /admin-dashboard.php");
             } else {
-                header("Location: learning-dashboard.php");
+                header("Location: /learning-dashboard.php");
             }
             exit();
         } else {
-            header("Location: learning-dashboard.php?error=invalid_password");
+            header("Location: /learning-dashboard.php?error=invalid_password");
             exit();
         }
     } else {
-        header("Location: learning-dashboard.php?error=user_not_found");
+        header("Location: /learning-dashboard.php?error=user_not_found");
         exit();
     }
 }
@@ -142,9 +142,9 @@ if (isset($_POST['update_profile'])) {
 
     if ($update_stmt->execute()) {
         $_SESSION['full_name'] = $first_name . ' ' . $last_name;
-        header("Location: learning-dashboard.php?view=settings&success=1");
+        header("Location: /learning-dashboard.php?view=settings&success=1");
     } else {
-        header("Location: learning-dashboard.php?view=settings&error=update_failed");
+        header("Location: /learning-dashboard.php?view=settings&error=update_failed");
     }
     $update_stmt->close();
     exit();
@@ -169,7 +169,7 @@ if (isset($_POST['submit_quiz'])) {
     $stmt->execute();
 
     // Redirect to Learning Dashboard to show the new attempt
-    header("Location: learning-dashboard.php?status=quiz_completed&score=$score");
+    header("Location: /learning-dashboard.php?status=quiz_completed&score=$score");
     exit();
 }
 
@@ -183,12 +183,12 @@ if (isset($_POST['submit_question']) && isset($_SESSION['user_id'])) {
         $stmt->bind_param("iis", $user_id, $course_id, $question);
         
         if ($stmt->execute()) {
-            header("Location: learning-dashboard.php?view=qa&status=submitted");
+            header("Location: /learning-dashboard.php?view=qa&status=submitted");
         } else {
-            header("Location: learning-dashboard.php?view=qa&status=error");
+            header("Location: /learning-dashboard.php?view=qa&status=error");
         }
     } else {
-        header("Location: learning-dashboard.php?view=qa&status=invalid");
+        header("Location: /learning-dashboard.php?view=qa&status=invalid");
     }
     exit();
 }
