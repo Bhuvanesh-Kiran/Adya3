@@ -2,6 +2,36 @@
 // =====================================================
 // CONFIGURATION FILE
 // =====================================================
+// Add this BEFORE session_start()
+class DatabaseSessionHandler implements SessionHandlerInterface {
+    private $db;
+    public function open($path, $name): bool { global $conn; $this->db = $conn; return true; }
+    public function close(): bool { return true; }
+    public function read($id): string {
+        $stmt = $this->db->prepare("SELECT data FROM sessions WHERE id = ?");
+        $stmt->bind_param("s", $id); $stmt->execute();
+        $res = $stmt->get_result()->fetch_assoc();
+        return $res['data'] ?? '';
+    }
+    public function write($id, $data): bool {
+        $now = time();
+        $stmt = $this->db->prepare("REPLACE INTO sessions (id, data, last_access) VALUES (?, ?, ?)");
+        $stmt->bind_param("ssi", $id, $data, $now);
+        return $stmt->execute();
+    }
+    public function destroy($id): bool {
+        $stmt = $this->db->prepare("DELETE FROM sessions WHERE id = ?");
+        $stmt->bind_param("s", $id); return $stmt->execute();
+    }
+    public function gc($max): int|false {
+        $old = time() - $max;
+        $stmt = $this->db->prepare("DELETE FROM sessions WHERE last_access < ?");
+        $stmt->bind_param("i", $old); return $stmt->execute() ? 1 : false;
+    }
+}
+
+$handler = new DatabaseSessionHandler();
+session_set_save_handler($handler, true);
 ob_start(); // Start output buffering
 
 // Session Security & Persistence Settings

@@ -114,3 +114,9 @@ CREATE TABLE IF NOT EXISTS quiz_attempts (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
+
+CREATE TABLE sessions (
+    id VARCHAR(128) NOT NULL PRIMARY KEY,
+    data TEXT NOT NULL,
+    last_access INT(11) NOT NULL
+);
