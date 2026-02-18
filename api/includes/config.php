@@ -2,7 +2,8 @@
 // =====================================================
 // CONFIGURATION FILE
 // =====================================================
-
+ini_set('session.cookie_samesite', 'Lax');
+ini_set('session.cookie_httponly', 1);
 // Error Reporting (Set to 0 in production)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
