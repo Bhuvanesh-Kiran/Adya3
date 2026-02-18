@@ -3,14 +3,6 @@ require_once 'includes/config.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 } 
-$is_logged_in = isset($_SESSION['user_id']); 
-
-// If a user is logged in, but we are viewing the login box, we might have a pathing error
-if ($is_logged_in && !isset($_GET['view'])) {
-    // Force the dashboard view if logged in but no view is set
-    header("Location: /learning-dashboard.php?view=dashboard");
-    exit();
-}
 $page_title = 'Learning Dashboard';
 require_once 'includes/header.php';
 

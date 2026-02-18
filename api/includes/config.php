@@ -2,11 +2,13 @@
 // =====================================================
 // CONFIGURATION FILE
 // =====================================================
+ob_start(); // Start output buffering
+
+// Session Security & Persistence Settings
 ini_set('session.cookie_samesite', 'Lax');
 ini_set('session.cookie_httponly', 1);
-// Error Reporting (Set to 0 in production)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.cookie_path', '/');
 
 // Site Configuration
 define('SITE_NAME', 'Adya3 Solutions');
