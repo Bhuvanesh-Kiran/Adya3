@@ -84,9 +84,13 @@ body {
     background-color: var(--bg-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    padding-top: 100px;
+    padding-top: 70px;
 }
-
+@media (max-width: 991px) {
+    body {
+        padding-top: 70px; /* Smaller padding for mobile header */
+    }
+}
 /* =====================================================
    TYPOGRAPHY
    ===================================================== */
@@ -3316,4 +3320,19 @@ a {
         flex: 0 0 100%;
         max-width: 100%;
     }
+}
+
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1999;
+}
+
+.mobile-menu-overlay.active {
+    display: block !important;
 }
