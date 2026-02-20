@@ -99,7 +99,7 @@
 </div>
     <!-- Custom JavaScript -->
     <script src="assets/js/main.js"></script>
-    <script>
+    <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
     const trigger = document.getElementById('contactTrigger');
     const options = document.querySelector('.contact-options');
@@ -128,6 +128,6 @@
         }
     });
 });
-</script>
+</script> -->
 </body>
 </html>
