@@ -116,5 +116,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <span></span><span></span><span></span>
             </button>
     </div>
+    </div>
 </nav>
     </header>
