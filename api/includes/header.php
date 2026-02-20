@@ -28,6 +28,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=1.18">
     <link rel="stylesheet" href="assets/css/responsive.css?v=1.8">
+    <script src="assets/js/main.js"></script>
 </head>
 <body>
     <!-- Mobile Menu Overlay -->
