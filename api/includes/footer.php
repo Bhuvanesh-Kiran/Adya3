@@ -98,7 +98,7 @@
     </button>
 </div>
     <!-- Custom JavaScript -->
-    <script src="assets/js/main.js?v=1.1"></script>
+    <script src="assets/js/main.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
     const trigger = document.getElementById('contactTrigger');
