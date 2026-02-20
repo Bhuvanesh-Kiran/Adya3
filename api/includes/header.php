@@ -107,6 +107,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li class="nav-item">
                 <a class="nav-link <?php echo ($current_page == 'learning-dashboard.php') ? 'active' : ''; ?>" href="learning-dashboard.php">Learning Dashboard</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-danger" href="auth.php?logout=true">Logout</a>
+            </li>
         <?php endif; ?>
         <li class="nav-item">
             <a class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>" href="contact.php">Contact Us</a>
