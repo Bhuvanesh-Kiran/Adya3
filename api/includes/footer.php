@@ -99,5 +99,35 @@
 </div>
     <!-- Custom JavaScript -->
     <script src="assets/js/main.js?v=1.1"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const trigger = document.getElementById('contactTrigger');
+    const options = document.querySelector('.contact-options');
+    const icon = document.getElementById('triggerIcon');
+
+    trigger.addEventListener('click', function() {
+        options.classList.toggle('active');
+        trigger.classList.toggle('active');
+        
+        // Toggle icon between comments and close
+        if (trigger.classList.contains('active')) {
+            icon.classList.remove('fa-comments');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-comments');
+        }
+    });
+
+    // Close menu if user clicks outside
+    document.addEventListener('click', function(event) {
+        if (!document.getElementById('contactMenu').contains(event.target)) {
+            options.classList.remove('active');
+            trigger.classList.remove('active');
+            icon.classList.replace('fa-times', 'fa-comments');
+        }
+    });
+});
+</script>
 </body>
 </html>
