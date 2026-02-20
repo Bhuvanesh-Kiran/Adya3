@@ -98,6 +98,6 @@
     </button>
 </div>
     <!-- Custom JavaScript -->
-    <script src="assets/js/main.js?v=1"></script>
+    <script src="assets/js/main.js?v=1.1"></script>
 </body>
 </html>
