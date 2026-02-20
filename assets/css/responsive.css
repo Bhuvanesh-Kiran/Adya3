@@ -950,49 +950,66 @@
     }
 }
 
+/* =====================================================
+   FIXED MOBILE NAVIGATION
+   ===================================================== */
 @media (max-width: 991px) {
-    /* FORCE the hamburger to show */
     .mobile-menu-toggle {
         display: flex !important;
-        flex-direction: column;
-        gap: 4px;
+        position: relative;
         z-index: 2001;
     }
 
-    /* Set default color for hamburger bars so they are visible */
-    .mobile-menu-toggle span {
-        display: block;
-        width: 25px;
-        height: 3px;
-        background-color: #1e293b; /* Dark color for visibility */
-        border-radius: 2px;
-    }
-
-    /* Hide the standard horizontal nav list */
-    .navbar-nav {
-        display: none !important; 
-    }
-
-    /* Mobile Menu Container Styles */
-    .nav-menu.active {
+    .nav-menu {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 280px !important;
+        height: 100vh !important;
+        background: #ffffff !important;
         display: block !important;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 280px;
-        height: 100vh;
-        background: white;
-        z-index: 2000;
-        padding: 100px 20px 40px;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        padding: 100px 20px 40px !important;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1) !important;
+        transition: right 0.4s ease-in-out !important;
+        z-index: 2000 !important;
     }
 
-    .nav-menu.active .navbar-nav {
-        display: flex !important;
+    .nav-menu.active {
+        right: 0 !important;
+    }
+
+    .navbar-nav {
         flex-direction: column !important;
-        gap: 15px;
+        align-items: flex-start !important;
+        gap: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+    }
+
+    .nav-item {
+        width: 100% !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+    }
+
+    .nav-link {
+        display: block !important;
+        padding: 15px 0 !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        color: var(--text-primary) !important;
+        text-align: left !important;
+    }
+
+    .nav-link.active {
+        color: var(--primary-color) !important;
+    }
+
+    .header {
+        position: fixed !important;
+        z-index: 2000 !important;
     }
 }
+
 /* =====================================================
    SHOPPING CART RESPONSIVENESS
    ===================================================== */
