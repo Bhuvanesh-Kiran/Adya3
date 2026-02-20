@@ -26,8 +26,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css?v=1.17">
-    <link rel="stylesheet" href="assets/css/responsive.css?v=1.7">
+    <link rel="stylesheet" href="assets/css/style.css?v=1.18">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=1.8">
     <script src="assets/js/main.js"></script>
 </head>
 <body>
