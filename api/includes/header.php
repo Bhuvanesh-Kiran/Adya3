@@ -28,7 +28,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=1.18">
     <link rel="stylesheet" href="assets/css/responsive.css?v=1.8">
-    <script src="assets/js/main.js?v=1"></script>
 </head>
 <body>
     <!-- Mobile Menu Overlay -->
@@ -112,11 +111,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>" href="contact.php">Contact Us</a>
         </li>
     </ul>
-            
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
+        </div>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
                 <span></span><span></span><span></span>
             </button>
-        </div>
     </div>
 </nav>
     </header>
