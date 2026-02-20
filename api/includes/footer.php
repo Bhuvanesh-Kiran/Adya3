@@ -81,12 +81,23 @@
     </div>
 </footer>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
+    <div class="floating-contact-wrapper" id="contactMenu">
+    <div class="contact-options">
+        <a href="https://wa.me/919030761831" class="contact-child whatsapp" target="_blank" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/adya3_solutions/" class="contact-child instagram" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="tel:+919030761831" class="contact-child phone" title="Call Us">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
+    <button class="contact-trigger" id="contactTrigger" aria-label="Contact Options">
+        <i class="fas fa-comments" id="triggerIcon"></i>
     </button>
-
+</div>
     <!-- Custom JavaScript -->
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js?v=1"></script>
 </body>
 </html>

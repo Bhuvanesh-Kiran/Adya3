@@ -72,45 +72,46 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
             
             <div class="nav-menu ms-auto" id="navMenu">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>" href="about.php">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo ($current_page == 'services.php') ? 'active' : ''; ?>" href="services.php">Services</a>
-                    </li>
-                    <?php 
-                        // Define all pages that should keep the "Courses" link active
-                        $course_pages = ['courses.php', 'course-details.php', 'cart.php', 'checkout.php', 'watch.php'];
-                        $is_course_active = in_array($current_page, $course_pages);
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo ($is_course_active) ? 'active' : ''; ?>" href="courses.php">Courses</a>
-                    </li>
-                    
-                    <?php if(isset($_SESSION['user_id'])): ?>
-                        <?php 
-                            $user_role = $_SESSION['role'] ?? 'student'; 
-                            if($user_role === 'admin'): 
-                        ?>
-                            <li class="nav-item">
-                                <a class="nav-link <?php echo ($current_page == 'admin-dashboard.php') ? 'active' : ''; ?>" href="admin-dashboard.php">Admin Dashboard</a>
-                            </li>
-                        <?php endif; ?>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>" href="index.php">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>" href="about.php">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($current_page == 'services.php') ? 'active' : ''; ?>" href="services.php">Services</a>
+        </li>
+        
+        <?php 
+            $course_pages = ['courses.php', 'course-details.php', 'cart.php', 'checkout.php', 'watch.php'];
+            $is_course_active = in_array($current_page, $course_pages);
+        ?>
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($is_course_active) ? 'active' : ''; ?>" href="courses.php">Courses</a>
+        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link <?php echo ($current_page == 'learning-dashboard.php') ? 'active' : ''; ?>" href="learning-dashboard.php">Learning Dashboard</a>
-                        </li>
-                    <?php endif; ?>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>" href="contact.php">Contact Us</a>
-                    </li>
-                </ul>
-            </div>
+        <?php if(!isset($_SESSION['user_id'])): ?>
+            <li class="nav-item">
+                <a class="nav-link <?php echo ($current_page == 'learning-dashboard.php') ? 'active' : ''; ?>" href="learning-dashboard.php">
+                    <i class="fas fa-user-circle me-1"></i> Login
+                </a>
+            </li>
+        <?php else: ?>
+            <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo ($current_page == 'admin-dashboard.php') ? 'active' : ''; ?>" href="admin-dashboard.php">Admin Dashboard</a>
+                </li>
+            <?php endif; ?>
+
+            <li class="nav-item">
+                <a class="nav-link <?php echo ($current_page == 'learning-dashboard.php') ? 'active' : ''; ?>" href="learning-dashboard.php">Learning Dashboard</a>
+            </li>
+        <?php endif; ?>
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>" href="contact.php">Contact Us</a>
+        </li>
+    </ul>
             
             <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
                 <span></span><span></span><span></span>
