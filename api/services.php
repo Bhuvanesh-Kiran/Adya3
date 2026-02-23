@@ -72,7 +72,7 @@ require_once 'includes/header.php';
                     <a href="contact.php" class="btn btn-primary mt-3">Request a Quote</a>
                 </div>
                 <div class="service-detail-image">
-                    <img src="https://shtheme.com/demosd/ziptech/wp-content/uploads/2023/05/home3-img1.png" alt="Website Development">
+                    <img src="assets\images\webdev.jfif" alt="Website Development">
                 </div>
             </div>
         </div>
