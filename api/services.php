@@ -72,7 +72,7 @@ require_once 'includes/header.php';
                     <a href="contact.php" class="btn btn-primary mt-3">Request a Quote</a>
                 </div>
                 <div class="service-detail-image">
-                    <img src="assets\images\webdev.jfif" alt="Website Development">
+                    <img src="assets\images\web-dev.jpg" alt="Website Development">
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@ require_once 'includes/header.php';
         <div class="service-detail reverse" id="app-development">
             <div class="service-detail-content">
                 <div class="service-detail-image">
-                    <img src="https://shtheme.com/demosd/ziptech/wp-content/uploads/2023/05/home3-img1.png" alt="App Development">
+                    <img src="assets\images\app-dev.avif" alt="App Development">
                 </div>
                 <div class="service-detail-text">
                     <span class="section-badge">Service 02</span>
@@ -158,7 +158,7 @@ require_once 'includes/header.php';
                     <a href="contact.php" class="btn btn-primary mt-3">Request a Quote</a>
                 </div>
                 <div class="service-detail-image">
-                    <img src="https://shtheme.com/demosd/ziptech/wp-content/uploads/2023/05/home3-img1.png" alt="Digital Marketing">
+                    <img src="assets\images\dig-mar.jpg" alt="Digital Marketing">
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@ require_once 'includes/header.php';
         <div class="service-detail reverse" id="seo">
             <div class="service-detail-content">
                 <div class="service-detail-image">
-                    <img src="https://shtheme.com/demosd/ziptech/wp-content/uploads/2023/05/home3-img1.png" alt="SEO Services">
+                    <img src="assets\images\seo.webp" alt="SEO Services">
                 </div>
                 <div class="service-detail-text">
                     <span class="section-badge">Service 04</span>
@@ -244,7 +244,7 @@ require_once 'includes/header.php';
                     <a href="contact.php" class="btn btn-primary mt-3">Request a Quote</a>
                 </div>
                 <div class="service-detail-image">
-                    <img src="https://shtheme.com/demosd/ziptech/wp-content/uploads/2023/05/home3-img1.png" alt="Brochure Design">
+                    <img src="assets\images\brochure.jpg" alt="Brochure Design">
                 </div>
             </div>
         </div>
@@ -253,7 +253,7 @@ require_once 'includes/header.php';
         <div class="service-detail reverse" id="logo-design">
             <div class="service-detail-content">
                 <div class="service-detail-image">
-                    <img src="https://shtheme.com/demosd/ziptech/wp-content/uploads/2023/05/home3-img1.png" alt="Logo Design">
+                    <img src="assets\images\logo.png" alt="Logo Design">
                 </div>
                 <div class="service-detail-text">
                     <span class="section-badge">Service 06</span>

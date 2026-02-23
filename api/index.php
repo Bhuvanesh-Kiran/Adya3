@@ -23,7 +23,7 @@ require_once 'includes/header.php';
                 </a>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <h3 class="stat-number">7+</h3>
+                        <h3 class="stat-number">8+</h3>
                         <p class="stat-label">Years Experience</p>
                     </div>
                     <div class="stat-item">
@@ -123,7 +123,7 @@ require_once 'includes/header.php';
                     <img src="https://shtheme.com/demosd/ziptech/wp-content/uploads/2023/05/about3-img1.jpg" alt="About Adya3" class="about-img-1">
                     <img src="https://shtheme.com/demosd/ziptech/wp-content/uploads/2023/05/about3-img2.jpg" alt="Team" class="about-img-2">
                     <div class="experience-badge">
-                        <h3>7+</h3>
+                        <h3>8+</h3>
                         <p>Years<br>Experience</p>
                     </div>
                 </div>
@@ -170,7 +170,7 @@ require_once 'includes/header.php';
                 <div class="stat-icon">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
-                <h3 class="counter" data-target="7">0</h3>
+                <h3 class="counter" data-target="8">0</h3>
                 <p>Years Of Experience</p>
             </div>
             
@@ -178,7 +178,7 @@ require_once 'includes/header.php';
                 <div class="stat-icon">
                     <i class="fas fa-project-diagram"></i>
                 </div>
-                <h3 class="counter" data-target="200">0</h3>
+                <h3 class="counter" data-target="283">0</h3>
                 <p>Projects Completed</p>
             </div>
             
@@ -186,7 +186,7 @@ require_once 'includes/header.php';
                 <div class="stat-icon">
                     <i class="fas fa-users"></i>
                 </div>
-                <h3 class="counter" data-target="50">0</h3>
+                <h3 class="counter" data-target="9">0</h3>
                 <p>Skilled Experts</p>
             </div>
             
@@ -194,7 +194,7 @@ require_once 'includes/header.php';
                 <div class="stat-icon">
                     <i class="fas fa-smile"></i>
                 </div>
-                <h3 class="counter" data-target="200">0</h3>
+                <h3 class="counter" data-target="187">0</h3>
                 <p>Satisfied Clients</p>
             </div>
         </div>
