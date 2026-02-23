@@ -248,6 +248,21 @@ require_once 'includes/header.php';
 <style>
     .cursor-pointer { cursor: pointer; transition: 0.2s; }
     .cursor-pointer:hover { background-color: #f0fff4; border-color: #10b981 !important; }
+    /* Accordion Styles */
+    .curriculum-body {
+        display: none; /* Hide by default */
+        overflow: hidden;
+    }
+    .curriculum-header {
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .curriculum-header.active {
+        background-color: #f8fafc;
+    }
+    .curriculum-header.active i {
+        transform: rotate(180deg);
+    }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -258,6 +273,30 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log("Quiz button found and ready.");
     }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all content section headers
+    const headers = document.querySelectorAll('.curriculum-header');
+    
+    headers.forEach(header => {
+        header.addEventListener('click', function() {
+            // Toggle active class for the icon rotation
+            this.classList.toggle('active');
+            
+            // Find the next curriculum-body after this header
+            let nextElement = this.nextElementSibling;
+            
+            // Loop through sibling elements until we hit another header or end of container
+            while (nextElement && nextElement.classList.contains('curriculum-body')) {
+                if (nextElement.style.display === "block") {
+                    nextElement.style.display = "none";
+                } else {
+                    nextElement.style.display = "block";
+                }
+                nextElement = nextElement.nextElementSibling;
+            }
+        });
+    });
 });
 </script>
 <?php require_once 'includes/footer.php'; ?>
