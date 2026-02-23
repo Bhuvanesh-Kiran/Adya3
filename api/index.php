@@ -27,7 +27,7 @@ require_once 'includes/header.php';
                         <p class="stat-label">Years Experience</p>
                     </div>
                     <div class="stat-item">
-                        <h3 class="stat-number">200+</h3>
+                        <h3 class="stat-number">187</h3>
                         <p class="stat-label">Trusted Companies</p>
                     </div>
                 </div>
