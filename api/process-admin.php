@@ -89,14 +89,29 @@ if (isset($_POST['update_course'])) {
     $stmt->close();
     exit();
 }
-// Handle Delete
+// --- HANDLE DELETE COURSE ---
 if (isset($_GET['delete_course'])) {
-    $id = sanitize($_GET['delete_course']);
+    $id = (int)$_GET['delete_course'];
+
+    // 1. Manually delete all child records first to satisfy foreign key constraints
+    $conn->query("DELETE FROM lessons WHERE course_id = $id");
+    $conn->query("DELETE FROM quizzes WHERE course_id = $id");
+    $conn->query("DELETE FROM enrollments WHERE course_id = $id");
+    $conn->query("DELETE FROM course_qa WHERE course_id = $id");
+    $conn->query("DELETE FROM quiz_attempts WHERE course_id = $id");
+
+    // 2. Now delete the parent course
     $stmt = $conn->prepare("DELETE FROM courses WHERE id = ?");
     $stmt->bind_param("i", $id);
+    
     if($stmt->execute()) {
         header("Location: admin-dashboard.php?view=manage_courses&status=deleted");
+    } else {
+        // Log the error if it still fails
+        error_log("Delete failed: " . $conn->error);
+        header("Location: admin-dashboard.php?view=manage_courses&status=error");
     }
+    $stmt->close();
     exit();
 }
 
