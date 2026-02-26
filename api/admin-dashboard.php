@@ -589,6 +589,7 @@ require_once 'includes/header.php';
                             <label class="form-label fw-bold" style="color: #374151;">Category <span class="text-danger">*</span></label>
                             <select name="category" class="form-select" required style="padding: 10px; border-radius: 8px;">
                                 <option value="">-- Select Category --</option>
+                                <option value="Wordpress Web Development">Wordpress Web Development</option>
                                 <option value="Web Development">Web Development</option>
                                 <option value="Python">Python</option>
                                 <option value="MERN Stack">MERN Stack</option>
